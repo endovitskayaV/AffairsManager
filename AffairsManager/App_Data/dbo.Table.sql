@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Affairs]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(), 
+    [Name] NVARCHAR(50) NULL, 
+    [Description] NVARCHAR(500) NULL, 
+    [Category] NVARCHAR(50) NULL
+)
