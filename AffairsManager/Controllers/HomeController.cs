@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AffairsManager.Models;
 
 namespace AffairsManager.Controllers
 {
     public class HomeController : Controller
     {
+        AffairsContext db = new AffairsContext();
+
         public ActionResult Index()
         {
-            return View();
+           
+            return View(db.Affairs);
         }
 
-        public ActionResult About()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            db.Dispose();
+            base.Dispose(disposing);
         }
 
-        public ActionResult Contact()
+        public ActionResult Edit()
         {
-            ViewBag.Message = "Your contact page.";
-
+            
             return View();
         }
+
     }
 }
