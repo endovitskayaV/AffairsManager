@@ -21,7 +21,8 @@
                     <td><p>@b.Name</p></td>
                     <td><p>@b.Description</p></td>
                     <td><p>@b.Category</p></td>
-                    <td><p><a href="/Home/Edit?name=@b.Name&description=@b.Description&category=@b.Category">Редактировать</a></p></td>
+                    <td><p><a href="/Home/Edit/@b.Id">Редактировать</a></p></td>
+                    <td><p><a href="/Home/Delete/@b.Id">Удалить</a></p></td>
                 </tr>
             }
             <tr>
