@@ -22,7 +22,12 @@
                     <td><p>@b.Description</p></td>
                     <td><p>@b.Category</p></td>
                     <td><p><a href="/Home/Edit/@b.Id">Редактировать</a></p></td>
-                    <td><p><a href="/Home/Delete/@b.Id">Удалить</a></p></td>
+                    <td> @Html.ActionLink(
+                        "Удалить",  //текст ссылки
+                        "Delete",   //метод
+                       new { id = b.Id }, // аргументы  и аттрибуты
+                       new {onclick="return confirm('Удалить ?');" }) </td> 
+                    <!--<td><p><a href="/Home/Delete/@b.Id">Удалить!</a></p></td> -->
                 </tr>
             }
             <tr>

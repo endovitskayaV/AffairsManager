@@ -27,7 +27,7 @@ namespace AffairsManager.Controllers
         {
             db.Affairs.Add(affair);
             db.SaveChanges();
-            return View("Index", db.Affairs);
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -47,17 +47,23 @@ namespace AffairsManager.Controllers
         {
             db.Affairs.AddOrUpdate(affair);
             db.SaveChanges();
-            return View("Index", db.Affairs);
+            return RedirectToAction("Index");
         }
 
-        [HttpGet]
+       /* [HttpGet]
         [ActionName("Delete")]
         public ActionResult ConfirmDelete(int? id)
         {
-            return PartialView();
+            if (id != null)
+            {
+                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
+                if (affair != null)
+                    return View();
+            }
+            return HttpNotFound();
         }
-
-        [HttpPost]
+        
+        [HttpPost]*/
         public ActionResult Delete(int? id)
         {
             if (id != null)
