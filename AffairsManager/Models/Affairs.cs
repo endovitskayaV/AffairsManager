@@ -5,6 +5,7 @@ using System.Web;
 
 namespace AffairsManager.Models
 {
+    
     public class Affairs
     {
         public int Id { get; set; }

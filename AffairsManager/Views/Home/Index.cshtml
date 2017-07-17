@@ -6,20 +6,29 @@
 <div>
     <h3>Список дел</h3>
     <table>
-        <tr class="header">
-            <td><p>Название</p></td>
-            <td><p>Описание</p></td>
-            <td><p>Категория</p></td>
-            <td></td>
-        </tr>
-        @foreach (AffairsManager.Models.Affairs b in Model)
-            {
-            <tr>
-                <td><p>@b.Name</p></td>
-                <td><p>@b.Description</p></td>
-                <td><p>@b.Category</p></td>
-                <td><p><a href="/Home/Edit/@b.Id">Редактировать</a></p></td>
+       
+            <tr class="header">
+                
+                    <td><p>Название</p></td>
+                    <td><p>Описание</p></td>
+                    <td><p>Категория</p></td>
+                    <td></td>
             </tr>
-        }
-    </table>
+           
+            @foreach (AffairsManager.Models.Affairs b in Model)
+            {
+                <tr>
+                    <td><p>@b.Name</p></td>
+                    <td><p>@b.Description</p></td>
+                    <td><p>@b.Category</p></td>
+                    <td><p><a href="/Home/Edit?name=@b.Name&description=@b.Description&category=@b.Category">Редактировать</a></p></td>
+                </tr>
+            }
+            <tr>
+                <td><p><a href="/Home/AddAffair">Добавить</a></p></td>
+            </tr>
+        <tr>
+            <td><p><a href="/Home/ChooseRandomAffair">Случайное</a></p></td>
+        </tr>
+</table>
 </div>
