@@ -1,30 +1,16 @@
 ﻿
-@using (Html.BeginForm(FormMethod.Get))
+@using (Html.BeginForm(FormMethod.Post))
 { 
 <p>
-    
-    <select id="sortMenu"name="sortCriteria" onchange="sendData()">
-        <option  selected="selected" disabled>              Упорядочить       </option>
-        <option  value="NameAsc">      Имя А-Я           </option>
-        <option  value="NameDesc">     Имя Я-А           </option>
-        <option  value="CategoryAsc">  Категория ↑       </option>
-        <option  value="CategoryDesc"> Катерогия ↓       </option>
-        <option  value="DateAsc">      Дата добавления ↑ </option>
-        <option  value="DateDesc">     Дата добавления ↓ </option>
+    Упорядочить
+    <select name="sortCriteria">
+         <option type="submit" value="NameAsc">  Имя А-Я    </option>
+        <option type="submit" value="NameDesc">     Имя Я-А           </option>
+        <option type="submit" value="CategoryAsc">  Категория ↑       </option>
+        <option type="submit" value="CategoryDesc"> Катерогия ↓       </option>
+        <option type="submit" value="DateAsc">      Дата добавления ↑ </option>
+        <option type="submit" value="DateDesc">     Дата добавления ↓ </option>
     </select>
- <!--  <input type="submit" value="Применить" />-->
+   <!-- <input type="submit" value="Применить" />-->
 </p>
 }
-
-<script>
-    function sendData() { 
-    var request = new XMLHttpRequest();
-    var body ="?sortCriteria="+ document.getElementById('sortMenu').options[document.getElementById('sortMenu').selectedIndex].value;
-    request.open("GET", "http://localhost:55491/Home/Index/" + body);
-    request.send();
-       
-       // var body = document.getElementById('sortMenu').options[document.getElementById('sortMenu').selectedIndex].value;
-      //  alert(body);
-    }
-</script>
-
