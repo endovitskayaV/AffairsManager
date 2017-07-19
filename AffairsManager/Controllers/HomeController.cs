@@ -60,32 +60,32 @@ namespace AffairsManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Sort(SortCriteria sortCriteria=SortCriteria.DateAsc)
+        public ActionResult Sort(SortCriteria sortCriteria = SortCriteria.DateAsc)
         {
             List<Affairs> affairsList = db.Affairs.ToList();
 
-            IOrderedEnumerable<Affairs> affairs= affairsList.OrderBy(x => x.Id);
+            IOrderedEnumerable<Affairs> affairs = affairsList.OrderBy(x => x.Id);
             switch (sortCriteria)
             {
                 case SortCriteria.NameAsc:
-                   affairs =affairsList.OrderBy(x => x.Name);
-                        break;
+                    affairs = affairsList.OrderBy(x => x.Name);
+                    break;
                 case SortCriteria.NameDesc:
-                    affairs=affairsList.OrderByDescending(x => x.Name);
+                    affairs = affairsList.OrderByDescending(x => x.Name);
                     break;
                 case SortCriteria.CategoryAsc:
-                    affairs=affairsList.OrderBy(x => x.Category);
+                    affairs = affairsList.OrderBy(x => x.Category);
                     break;
                 case SortCriteria.CategoryDesc:
-                    affairs=affairsList.OrderByDescending(x => x.Category);
+                    affairs = affairsList.OrderByDescending(x => x.Category);
                     break;
                 case SortCriteria.DateDesc:
                     //affairsList.Reverse();
-                    affairs=affairsList.OrderByDescending(x => x.Id); //НЕКРАСИВО!!!
+                    affairs = affairsList.OrderByDescending(x => x.Id); //НЕКРАСИВО!!!
                     break;
             }
 
-            return View("Index",affairs.ToList());
+            return View("Index", affairs.ToList());
         }
 
         [HttpGet]
@@ -122,20 +122,20 @@ namespace AffairsManager.Controllers
             return RedirectToAction("Index");
         }
 
-       /* [HttpGet]
-        [ActionName("Delete")]
-        public ActionResult ConfirmDelete(int? id)
-        {
-            if (id != null)
-            {
-                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
-                if (affair != null)
-                    return View();
-            }
-            return HttpNotFound();
-        }
-        
-        [HttpPost]*/
+        /* [HttpGet]
+         [ActionName("Delete")]
+         public ActionResult ConfirmDelete(int? id)
+         {
+             if (id != null)
+             {
+                 Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
+                 if (affair != null)
+                     return View();
+             }
+             return HttpNotFound();
+         }
+         
+         [HttpPost]*/
         public ActionResult Delete(int? id)
         {
             if (id != null)
@@ -145,7 +145,10 @@ namespace AffairsManager.Controllers
                 {
                     db.Affairs.Remove(affair);
                     db.SaveChanges();
-                    return View("Index", db.Affairs);
+
+                    if (db.Affairs.ToList().Count < 1)
+                         return RedirectToAction("Index");
+                    else return RedirectToAction("Index", db.Affairs);
                 }
             }
             return HttpNotFound();
