@@ -5,14 +5,12 @@
 
 <h2>Add</h2>
 
-
 @using (Html.BeginForm())
 {
-
-    <p>Name: @Html.TextBoxFor(x => x.Name) </p>
-        <p>Description: @Html.TextBoxFor(x => x.Description)</p>
-        <p>Category: @Html.TextBoxFor(x => x.Category)</p>
-
-        <input type="submit" value="Save"/>
+    <p>Name:        @Html.TextBoxFor(x => x.Name)        </p>
+    <p>Description: @Html.TextBoxFor(x => x.Description) </p>
+    <p>Category:    @Html.TextBoxFor(x => x.Category)    </p>
+    
+    <input type="submit" value="Сохранить"/>
 }
 

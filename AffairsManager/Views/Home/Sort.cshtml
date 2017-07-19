@@ -1,0 +1,16 @@
+﻿
+@using (Html.BeginForm(FormMethod.Post))
+{ 
+<p>
+    Упорядочить
+    <select name="sortCriteria">
+         <option type="submit" value="NameAsc">  Имя А-Я    </option>
+        <option type="submit" value="NameDesc">     Имя Я-А           </option>
+        <option type="submit" value="CategoryAsc">  Категория ↑       </option>
+        <option type="submit" value="CategoryDesc"> Катерогия ↓       </option>
+        <option type="submit" value="DateAsc">      Дата добавления ↑ </option>
+        <option type="submit" value="DateDesc">     Дата добавления ↓ </option>
+    </select>
+   <!-- <input type="submit" value="Применить" />-->
+</p>
+}
