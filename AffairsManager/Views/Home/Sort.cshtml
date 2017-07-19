@@ -1,9 +1,9 @@
 ﻿
-@using (Html.BeginForm(FormMethod.Post))
-{ 
+@using (Html.BeginForm(FormMethod.Get))
+{
 <p>
     Упорядочить
-    <select name="sortCriteria">
+    <select id="sortMenu"name="sortCriteria" onchange="sendData()">
          <option type="submit" value="NameAsc">  Имя А-Я    </option>
         <option type="submit" value="NameDesc">     Имя Я-А           </option>
         <option type="submit" value="CategoryAsc">  Категория ↑       </option>
@@ -11,6 +11,16 @@
         <option type="submit" value="DateAsc">      Дата добавления ↑ </option>
         <option type="submit" value="DateDesc">     Дата добавления ↓ </option>
     </select>
-   <!-- <input type="submit" value="Применить" />-->
+ <!--  <input type="submit" value="Применить" />-->
 </p>
 }
+
+    <script>
+    function sendData() {
+        var request = new XMLHttpRequest();
+        var body = "?sortCriteria=" + document.getElementById('sortMenu').options[document.getElementById('sortMenu').selectedIndex].value;
+        request.open("GET", "http://localhost:55491/Home/Sort/" + body);
+        request.send();
+    }
+</script>
+    

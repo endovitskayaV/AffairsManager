@@ -5,7 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using AffairsManager.Models;
 using System.Data.Entity.Migrations;
+using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace AffairsManager.Controllers
 {
@@ -14,7 +18,6 @@ namespace AffairsManager.Controllers
         public SortCriteria sortCriteria;
         public enum SortCriteria
         {
-            //[Display (Name= "Имя А-Я")]      
             NameAsc, //возрастанию
             NameDesc, //убыванию
             CategoryAsc,
@@ -24,7 +27,18 @@ namespace AffairsManager.Controllers
         }
         private AffairsContext db = new AffairsContext();
 
-        public ActionResult Index(SortCriteria sortCriteria = SortCriteria.DateAsc)
+        public ActionResult Index()
+        {
+            return View(db.Affairs.ToList());
+            /*
+             Необходимо представить БД в виде листа, 
+             чтобы в представлении можно было проверить условие Model.Count > 0
+             Иначе возникает ошибка, потому что тогда у модели не свойста Count
+             Count нужен, чтобы проверить условие наличия хоть одного дела
+             */
+        }
+
+        public ActionResult Sort(SortCriteria sortCriteria=SortCriteria.DateAsc)
         {
             List<Affairs> affairsList = db.Affairs.ToList();
 
@@ -50,42 +64,6 @@ namespace AffairsManager.Controllers
             }
 
             return View("Index", affairs.ToList());
-
-            /* ViewBag.Criteria=new SelectList(
-                new List<SortCriteria>
-                {SortCriteria.CategoryAsc,SortCriteria.CategoryDesc,
-                 SortCriteria.DateAsc,SortCriteria.DateDesc,
-                 SortCriteria.NameAsc, SortCriteria.NameDesc});*/
-            // return View(db.Affairs);
-        }
-
-        [HttpPost]
-        public ActionResult Sort(SortCriteria sortCriteria=SortCriteria.DateAsc)
-        {
-            List<Affairs> affairsList = db.Affairs.ToList();
-
-            IOrderedEnumerable<Affairs> affairs= affairsList.OrderBy(x => x.Id);
-            switch (sortCriteria)
-            {
-                case SortCriteria.NameAsc:
-                   affairs =affairsList.OrderBy(x => x.Name);
-                        break;
-                case SortCriteria.NameDesc:
-                    affairs=affairsList.OrderByDescending(x => x.Name);
-                    break;
-                case SortCriteria.CategoryAsc:
-                    affairs=affairsList.OrderBy(x => x.Category);
-                    break;
-                case SortCriteria.CategoryDesc:
-                    affairs=affairsList.OrderByDescending(x => x.Category);
-                    break;
-                case SortCriteria.DateDesc:
-                    //affairsList.Reverse();
-                    affairs=affairsList.OrderByDescending(x => x.Id); //НЕКРАСИВО!!!
-                    break;
-            }
-
-            return View("Index",affairs.ToList());
         }
 
         [HttpGet]
@@ -145,7 +123,7 @@ namespace AffairsManager.Controllers
                 {
                     db.Affairs.Remove(affair);
                     db.SaveChanges();
-                    return View("Index", db.Affairs);
+                    return RedirectToAction("Index");
                 }
             }
             return HttpNotFound();
