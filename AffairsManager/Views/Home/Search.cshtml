@@ -1,0 +1,11 @@
+﻿<form method="get" action="~/Home/Search">
+    @Html.TextBox("request")
+    <select name="searchCriteria">
+        <option disabled>             Искать по        </option>
+        <option value="Name">         Имени            </option>
+        <option value="Description">  Описанию         </option>
+        <option value="Category">     Категории        </option>
+        <option selected value="All"> Любое совпадение </option>
+    </select>
+    <input type="submit" value="Найти" />
+</form>
