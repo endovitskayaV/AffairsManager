@@ -1,24 +1,44 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    font-family: 'Merriweather', serif;
+    color: #594242;
+    background-image: url(http://www.niceimage.ru/pic/201305/1366x768/niceimage.ru-49636.jpg);
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.dottedSheet {
+    display: table;
+    width: auto;
+    margin: 0 auto;
+    padding: 15px 20px 30px 20px; 
+    letter-spacing: 2px;
+    background: #fdf4e3;
+    border: 2px dashed #8c1f1f;
+    color: #594242;
+    box-shadow: 0 0 0 7px #fdf4e3;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.header {
+    font-size: 50px;
+    text-align:center;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.center{
+    text-align:center;
+}
+
+.description, #go {
+    display: none;
+}
+
+    #go:checked ~ .description {
+        display: block;
+    }
+
+.material-icons.cursorPointer {
+    cursor: pointer;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+.material-icons.cl-green {
+    color:forestgreen;
 }

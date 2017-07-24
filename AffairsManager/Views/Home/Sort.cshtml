@@ -1,25 +1,10 @@
-﻿
-@using (Html.BeginForm(FormMethod.Get))
-{
-<p>
-   
-    <select id="sortMenu"name="sortCriteria" onchange="sendData()"> 
-        <option selected disabled> Упорядочить         </option>
-        <option value="NameAsc">      Имя А-Я          </option>
-        <option  value="NameDesc">    Имя Я-А           </option>
-        <option value="CategoryAsc">  Категория ↑       </option>
-        <option value="CategoryDesc"> Катерогия ↓       </option>
-        <option value="DateAsc">      Дата добавления ↑ </option>
-        <option value="DateDesc">     Дата добавления ↓ </option>
-    </select>
-</p>
-}
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<i class="material-icons">sort</i>
 
-<script>
-    function sendData() {
-        var request = new XMLHttpRequest();
-        var body = "?sortCriteria=" + document.getElementById('sortMenu').options[document.getElementById('sortMenu').selectedIndex].value;
-        request.open("GET", "http://localhost:55491/Home/Sort/" + body);
-        request.send();
-    }
-</script>
+<form method="get" action="~/Home/Sort">
+    <p>
+        <button value="New"       name="sortCriteria"> Сначала новые  </button>
+        <button value="Important" name="sortCriteria"> Сначала важные </button>
+    </p>
+</form>

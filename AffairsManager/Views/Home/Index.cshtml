@@ -1,51 +1,24 @@
-﻿
+﻿ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 @{
     Layout = null; //"~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    @if (Model != null && Model.Count > 0)
-    {
 
-        <h3>Список дел</h3>
-        <table>
-            <tr class="header">
-                <td><p>Название</p></td>
-                <td><p>Описание</p></td>
-                <td><p>Категория</p></td>
-                <td></td>
-            </tr>
-
-            @foreach (AffairsManager.Models.Affairs b in Model)
-            {
-                <tr>
-                    <td><p>@b.Name        </p></td>
-                    <td><p>@b.Description </p></td>
-                    <td><p>@b.Category    </p></td>
-
-                    <td><p><a href="/Home/Edit/@b.Id">Редактировать</a></p></td>
-                    <td>
-                        @Html.ActionLink(
-                   "Удалить",  //текст ссылки
-                   "Delete",   //метод
-                  new { id = b.Id }, // аргументы  и аттрибуты
-                  new { onclick = "return confirm('Удалить ?');" })
-                    </td>
-                    <!--<td><p><a href="/Home/Delete/@b.Id">Удалить!</a></p></td> -->
-                </tr>
-            }
-        </table>
-
-    }
-    else
-    {
-        <br>
-        <h3>Список дел пуст</h3>
-    }
-    <table>
-        <tr> <td> <p> <a href="/Home/AddAffair">Добавить</a></p></td></tr>
-        <tr> <td> <p> <a href="/Home/ChooseRandomAffair">Случайное</a></p></td> </tr>
+@Html.Partial("AffairsTable")
+<table>
+        <tr><td><p><a href="/Home/AddAffair">
+                      <i class="material-icons"> add_circle_outline</i>
+                   </a> </p></td></tr>
+        <tr><td><p><a href="/Home/ChooseRandomAffair">
+                      <i class="material-icons">casino</i>
+               </a></p>
+            
+                <i class="material-icons">menu</i>
+                <i class="material-icons">delete</i>
+                <i class="material-icons">save</i>
+                <i class="material-icons">home</i>
+            </td> </tr>
         <tr> <td> @Html.Partial("Sort")</td></tr>
         <tr> <td> @Html.Partial("Search")</td></tr>
-    </table>
-
-</div>
+</table>

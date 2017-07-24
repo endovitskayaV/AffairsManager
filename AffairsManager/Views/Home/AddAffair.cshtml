@@ -1,16 +1,19 @@
-﻿@model AffairsManager.Models.Affairs
+﻿<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+@model AffairsManager.Models.Affairs
 @{
     Layout = null;
 }
+<div class="center"> 
+    <div class="header">Add</div>
 
-<h2>Add</h2>
-
-@using (Html.BeginForm())
-{
-    <p>Name:        @Html.TextBoxFor(x => x.Name)        </p>
-    <p>Description: @Html.TextBoxFor(x => x.Description) </p>
-    <p>Category:    @Html.TextBoxFor(x => x.Category)    </p>
+    @using (Html.BeginForm())
+        {
+            <p>Name:        @Html.TextBoxFor(x => x.Name, new { @maxlength = "100"})        </p>
+            <p>Description: @Html.TextBoxFor(x => x.Description) </p>
+            <p>Category:    @Html.TextBoxFor(x => x.Category)    </p>
     
-    <input type="submit" value="Сохранить"/>
-}
+            <input type="submit" value="Сохранить"/>
+    }
+ </div>
 

@@ -1,11 +1,76 @@
-﻿<form method="get" action="~/Home/Search">
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+<form method="get" action="~/Home/Search">
+
     @Html.TextBox("request")
     <select name="searchCriteria">
-        <option disabled>             Искать по        </option>
-        <option value="Name">         Имени            </option>
-        <option value="Description">  Описанию         </option>
-        <option value="Category">     Категории        </option>
-        <option selected value="All"> Любое совпадение </option>
+        <option disabled>   Искать по  </option>
+        @if (ViewBag.SelectedCriteria != null)
+        {
+            if (ViewBag.SelectedCriteria.ToString() == "Name")
+            {
+                <option selected value="Name">
+                    Имени
+                </option>
+            }
+            else
+            {
+                <option value="Name">
+                    Имени
+                </option>
+            }
+            if (ViewBag.SelectedCriteria.ToString() == "Description")
+            {
+                <option selected value="Description">
+                    Описанию
+                </option>
+            }
+            else
+            {
+                <option value="Description">
+                    Описанию
+                </option>
+            }
+            if (ViewBag.SelectedCriteria.ToString() == "Category")
+            {
+                <option selected value="Category">
+                    Категории
+                </option>
+            }
+            else
+            {
+                <option value="Category">
+                    Категории
+                </option>
+            }
+            if (ViewBag.SelectedCriteria.ToString() == "All")
+            {
+                <option selected value="All">
+                    Любое совпадение
+                </option>
+            }
+            else
+            {
+                <option value="All">
+                    Любое совпадение
+                </option>
+            }
+        }
+        else
+        {
+            <option value="Name">Имени</option>
+            <option value="Description">Описанию</option>
+            <option value="Category">Категории</option>
+            <option selected value="All">Любое совпадение</option>
+        }
     </select>
+    <i class="material-icons">search</i>
     <input type="submit" value="Найти" />
 </form>
+<p><div> @ViewBag.Warning</div></p>
+@if (ViewBag.Warning == null)
+{
+    <p><div> @ViewBag.Message</div></p>
+}

@@ -1,0 +1,37 @@
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+<div class="dottedSheet">
+    <p class="header">Список дел</p>
+    @if (Model != null && Model.Count > 0 && ViewBag.Warning == null)
+    {
+        <table> 
+            @foreach (AffairsManager.Models.Affairs b in Model)
+                {
+                   <tr>
+                       <td valign="bottom"><i class="material-icons cl-green">label</i></td>
+                       <td>@b.Name</td>
+                       <td><label for="go">
+                                 <i class="material-icons cursorPointer">keyboard_arrow_down</i> </label></td>
+                       <td>
+                           @Html.ActionLink(
+                              "Удалить",  //текст ссылки
+                              "Delete",   //метод
+                              new { id = b.Id }, // аргументы  и аттрибуты
+                              new { onclick = "return confirm('Удалить ?');" })
+                       </td>
+                   </tr>
+                   <tr> <td>                                        </td>
+                        <td width="@b.Name.Length"><input id="go" type="checkbox" />  
+                            <label class="description"> @b.Description</label></td>
+                  </tr>
+                 }
+        </table>
+    }
+
+    else
+    {
+        <p class="center">&#8249;пустo&#8250;</p>
+    }
+</div>

@@ -22,12 +22,8 @@ namespace AffairsManager.Controllers
 
         public enum SortCriteria
         {
-            DateAsc, // сначала добавленные давно
-            NameAsc, //возрастанию
-            NameDesc, //убыванию
-            CategoryAsc,
-            CategoryDesc,
-            DateDesc //сначала последние добавленные
+            New,
+            Important
         }
 
         public enum SearchCriteria
@@ -39,12 +35,10 @@ namespace AffairsManager.Controllers
         }
 
         private AffairsContext db;
-        private SortCriteria sortCriteria;
 
         public ActionResult Index()
         {
-            return Sort(this.sortCriteria);
-           // return View(db.Affairs.ToList());
+             return View(db.Affairs.ToList());
             /*
              Необходимо представить БД в виде листа, 
              чтобы в представлении можно было проверить условие Model.Count > 0
@@ -53,66 +47,65 @@ namespace AffairsManager.Controllers
              */
         }
 
-        public  ActionResult Sort(SortCriteria sortCriteria)
+        public  ActionResult Sort(SortCriteria? sortCriteria)
         {
-            this.sortCriteria = sortCriteria;
-            IQueryable<Affairs> query = db.Affairs;
-            query = query.OrderBy(x => x.Id);
+            List<Affairs> list= db.Affairs.ToList();
             
             switch (sortCriteria)
             {
-                case SortCriteria.NameAsc:
-                    query = query.OrderBy(x => x.Name);
+                case SortCriteria.Important:
+                    list.Sort((a, b) => b.Category.CompareTo(a.Category));
                     break;
-                case SortCriteria.NameDesc:
-                    query = query.OrderByDescending(x => x.Name);
-                    break;
-                case SortCriteria.CategoryAsc:
-                    query = query.OrderBy(x => x.Category);
-                    break;
-                case SortCriteria.CategoryDesc:
-                    query = query.OrderByDescending(x => x.Category);
-                    break;
-                case SortCriteria.DateDesc:
-                    //affairsList.Reverse();
-                    query = query.OrderByDescending(x => x.Id); //НЕКРАСИВО?!
+                case SortCriteria.New:
+                    list.Reverse();
                     break;
             }
-            return View("Index", query.ToList());
-
+            return View("Index", list);
         }
 
-        public ActionResult Search(string request, SearchCriteria searchCriteria )
+        public ActionResult Search(string request, SearchCriteria searchCriteria)
         {
-            IQueryable<Affairs> query = db.Affairs;
+            ViewBag.Message = "Найдено по запросу " + "'" + request + "'";
+            ViewBag.SelectedCriteria = searchCriteria;
+
+            IEnumerable<Affairs> affairsList = db.Affairs;
+
             if (request == null || request == "")
-                return Content("<script language='javascript' type='text/javascript'>alert('Empty request!');</script>");
+            {
+                ViewBag.Warning = "Empty request";
+            }
             else
             {
                 switch (searchCriteria)
                 {
                     case SearchCriteria.Name:
-                        query = query.Where(x => x.Name.Contains(request));
+                        affairsList = affairsList.Where(x => x.Name.Contains(request));
                         break;
                     case SearchCriteria.Description:
-                        query = query.Where(x => x.Description.Contains(request));
+                        affairsList = affairsList.Where(x => x.Description.Contains(request));
                         break;
                     case SearchCriteria.Category:
-                        query = query.Where(x => x.Category.Contains(request));
+                        affairsList = affairsList.Where(x => x.Category.Contains(request));
                         break;
                     default:
-                        query = query.Where(x => x.Name.Contains(request));
+                        affairsList = affairsList.Where(x => x.Name.Contains(request));
                         IQueryable<Affairs> queryNewReq = db.Affairs;
-                        queryNewReq= queryNewReq.Where(x => x.Description.Contains(request));
-                        query = query.Union(queryNewReq);
+                        queryNewReq = queryNewReq.Where(x => x.Description.Contains(request));
+                        affairsList = affairsList.Union(queryNewReq);
                         queryNewReq = db.Affairs;
                         queryNewReq = queryNewReq.Where(x => x.Category.Contains(request));
-                        query = query.Union(queryNewReq);
-                        query = query.Distinct();
+                        affairsList = affairsList.Union(queryNewReq);
+                        affairsList = affairsList.Distinct();
                         break;
                 }
-                return View("Index", query.ToList());
+               
+                if (affairsList.ToList().Count<1)
+                {
+                    ViewBag.Warning = "Nothing is found";
+                    affairsList = db.Affairs;
+                }
             }
+            return View("Index", affairsList.ToList());
         }
 
         [HttpGet]
@@ -186,12 +179,11 @@ namespace AffairsManager.Controllers
             return View("Random", affairsList[index]);
         }
 
-       /* protected override void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
-        */
 
 
     }
