@@ -30,7 +30,6 @@ namespace AffairsManager.Controllers
         {
             Name,
             Description,
-            Category,
             All
         }
 
@@ -54,7 +53,7 @@ namespace AffairsManager.Controllers
             switch (sortCriteria)
             {
                 case SortCriteria.Important:
-                    list.Sort((a, b) => b.Category.CompareTo(a.Category));
+                    list.Sort((a, b) => b.Importance.CompareTo(a.Importance));//НАПИСАТЬ СВОЙ КОМПАРАТОР!
                     break;
                 case SortCriteria.New:
                     list.Reverse();
@@ -68,7 +67,7 @@ namespace AffairsManager.Controllers
             ViewBag.Message = "Найдено по запросу " + "'" + request + "'";
             ViewBag.SelectedCriteria = searchCriteria;
 
-            IEnumerable<Affairs> affairsList = db.Affairs;
+            IEnumerable<Affairs> affairsEnumerable = db.Affairs;
 
             if (request == null || request == "")
             {
@@ -79,33 +78,27 @@ namespace AffairsManager.Controllers
                 switch (searchCriteria)
                 {
                     case SearchCriteria.Name:
-                        affairsList = affairsList.Where(x => x.Name.Contains(request));
+                        affairsEnumerable = affairsEnumerable.Where(x => x.Name.Contains(request));
                         break;
                     case SearchCriteria.Description:
-                        affairsList = affairsList.Where(x => x.Description.Contains(request));
-                        break;
-                    case SearchCriteria.Category:
-                        affairsList = affairsList.Where(x => x.Category.Contains(request));
+                        affairsEnumerable = affairsEnumerable.Where(x => x.Description.Contains(request));
                         break;
                     default:
-                        affairsList = affairsList.Where(x => x.Name.Contains(request));
+                        affairsEnumerable = affairsEnumerable.Where(x => x.Name.Contains(request));
                         IQueryable<Affairs> queryNewReq = db.Affairs;
                         queryNewReq = queryNewReq.Where(x => x.Description.Contains(request));
-                        affairsList = affairsList.Union(queryNewReq);
-                        queryNewReq = db.Affairs;
-                        queryNewReq = queryNewReq.Where(x => x.Category.Contains(request));
-                        affairsList = affairsList.Union(queryNewReq);
-                        affairsList = affairsList.Distinct();
+                        affairsEnumerable = affairsEnumerable.Union(queryNewReq);
+                        affairsEnumerable = affairsEnumerable.Distinct();
                         break;
                 }
                
-                if (affairsList.ToList().Count<1)
+                if (affairsEnumerable.ToList().Count<1)
                 {
                     ViewBag.Warning = "Nothing is found";
-                    affairsList = db.Affairs;
+                    affairsEnumerable = db.Affairs;
                 }
             }
-            return View("Index", affairsList.ToList());
+            return View("Index", affairsEnumerable.ToList());
         }
 
         [HttpGet]
@@ -117,17 +110,18 @@ namespace AffairsManager.Controllers
         [HttpPost]
         public ActionResult AddAffair(Affairs affair)
         {
+            affair.Id =UnixTimeSeconds();
             db.Affairs.Add(affair);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+       
         [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id != null)
             {
-                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
+                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id==id);
                 if (affair != null)
                     return View(affair);
             }
@@ -177,6 +171,11 @@ namespace AffairsManager.Controllers
             List<Affairs> affairsList = db.Affairs.ToList();
             int index = rnd.Next(0, affairsList.Count);
             return View("Random", affairsList[index]);
+        }
+
+        private int UnixTimeSeconds()
+        {
+            return (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
         }
 
         protected override void Dispose(bool disposing)

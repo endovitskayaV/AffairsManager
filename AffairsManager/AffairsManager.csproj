@@ -248,6 +248,7 @@
     <Content Include="Views\Home\Sort.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\AffairsTable.cshtml" />
+    <Content Include="Views\Home\CategoryColorMatching.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

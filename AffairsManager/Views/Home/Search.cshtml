@@ -11,7 +11,7 @@
         {
             if (ViewBag.SelectedCriteria.ToString() == "Name")
             {
-                <option selected value="Name">
+                <option selected value="@ViewBag.SelectedCriteria.ToString()">
                     Имени
                 </option>
             }
@@ -33,18 +33,6 @@
                     Описанию
                 </option>
             }
-            if (ViewBag.SelectedCriteria.ToString() == "Category")
-            {
-                <option selected value="Category">
-                    Категории
-                </option>
-            }
-            else
-            {
-                <option value="Category">
-                    Категории
-                </option>
-            }
             if (ViewBag.SelectedCriteria.ToString() == "All")
             {
                 <option selected value="All">
@@ -62,7 +50,6 @@
         {
             <option value="Name">Имени</option>
             <option value="Description">Описанию</option>
-            <option value="Category">Категории</option>
             <option selected value="All">Любое совпадение</option>
         }
     </select>

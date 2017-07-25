@@ -6,14 +6,19 @@
 }
 <div class="center"> 
     <div class="header">Add</div>
-
+       <div class="dottedSheet">
     @using (Html.BeginForm())
         {
-            <p>Name:        @Html.TextBoxFor(x => x.Name, new { @maxlength = "100"})        </p>
+            <p>Name:        @Html.TextBoxFor(x => x.Name, new { @maxlength = "100"})</p>
             <p>Description: @Html.TextBoxFor(x => x.Description) </p>
-            <p>Category:    @Html.TextBoxFor(x => x.Category)    </p>
-    
+            <p>Category:    @Html.RadioButtonFor(x=>x.Importance, "Red")
+                                <span class="cl-red">Крайне важно</span> <br />
+                            @Html.RadioButtonFor(x => x.Importance,"Orange")
+                                <span class="cl-orange">Важно</span> <br />
+                            @Html.RadioButtonFor(x => x.Importance, "Green")
+                                <span class="cl-green">Неважно</span> <br />    </p>
             <input type="submit" value="Сохранить"/>
     }
+           </div>
  </div>
 

@@ -1,4 +1,5 @@
-﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+﻿
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 
@@ -10,7 +11,21 @@
             @foreach (AffairsManager.Models.Affairs b in Model)
                 {
                    <tr>
-                       <td valign="bottom"><i class="material-icons cl-green">label</i></td>
+                       <td valign="bottom">
+                           @switch (b.Importance)
+                           {
+                               case "Green":
+                                <i class="material-icons cl-green">label</i>
+                                   break;
+                               case "Red":
+                                <i class="material-icons cl-red">label</i>
+                                   break;
+                               case "Orange":
+                                <i class="material-icons cl-orange">label</i>
+                                   break;
+                           }
+                       </td>
+
                        <td>@b.Name</td>
                        <td><label for="go">
                                  <i class="material-icons cursorPointer">keyboard_arrow_down</i> </label></td>
