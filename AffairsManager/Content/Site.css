@@ -22,6 +22,7 @@
 .header {
     font-size: 50px;
     text-align:center;
+    margin-bottom:35px;
 }
 
 .center{
@@ -97,8 +98,8 @@ button {
     font-family: 'Merriweather', serif;
 }
 
-.material-icons.alig-top {
-    vertical-align: text-top; /*sub;*/
+.material-icons {
+    vertical-align:text-top;
 }
 
 ul {
@@ -118,4 +119,9 @@ textarea {
 }
 .margin-top {
     margin-top:35px;
+}
+.bigText {
+    font-size: 27px;
+    text-align: center;
+    margin-bottom: 35px;
 }
