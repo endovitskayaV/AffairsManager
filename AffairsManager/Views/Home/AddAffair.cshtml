@@ -7,29 +7,52 @@
 }
 
 <a href="/Home/Index">
-    <i class="material-icons">home</i>
+    <i class="material-icons alig-top">home</i>
+    Домой
 </a>
-    
-       <div class="dottedSheet">
-           <div class="header">Добавить</div>
-    @using (Html.BeginForm())
-        {
-            <p>Название: @Html.TextBoxFor(x => x.Name,
-                            new { @maxlength = "100", required = "required",style = "width: 280px;"})</p>
-            <p>Описание: @Html.TextAreaFor(x => x.Description,
-                            new { @style = "width: 280px;" }) </p>
-            <p>Важность:  <br> 
-                         @Html.RadioButtonFor(x=>x.Importance, "Red", new {@checked="chrecked"})
-                                <span class="textRed">Крайне важно</span> <br />
-                         @Html.RadioButtonFor(x => x.Importance,"Orange")
-                                <span class="textOrange">Важно</span> <br />
-                         @Html.RadioButtonFor(x => x.Importance, "Green")
-                                <span class="textGreen">Неважно</span> <br />    </p>
-           <input type="submit" value="Сохранить"> 
-        <i class="material-icons">save</i> <label>Сохранить</label> <input/>
-    <a href="/Home/Index">
-        <i class="material-icons"> cancel</i>Отменить
-    </a>
+   @using (Html.BeginForm())
+   {
+    <div class="dottedSheet padding">
+    <div class="header">Новое дело</div>
+    <table>
+        <tr  height="40px">
+            <td>Название:</td>
+            <td class="padding-left">
+                @Html.TextBoxFor(x => x.Name,
+             new { required = "required", style = "width: 400px;", @class="outline"})
+        </td>
+    </tr>
+    <tr>
+        <td>Описание:</td>
+        <td class="padding-left">
+            @Html.TextAreaFor(x => x.Description,
+                  new { @style = "width: 400px;", rows = "4", @class = "outline" })
+    </td>
+</tr>
+<tr  height="40px">
+    <td>Катерогия:</td>
+    <td>
+        @Html.RadioButtonFor(x => x.Importance, "Red",
+                      new { @checked = "chrecked" })
+        <span class="textRed">Крайне важно</span>
+        @Html.RadioButtonFor(x => x.Importance, "Orange")
+        <span class="textOrange">Важно</span>
+        @Html.RadioButtonFor(x => x.Importance, "Green")
+        <span class="textGreen">Неважно</span>
+    </td>
 
-    }
+</table>
 </div>
+<div class="margin-top">
+<ul id="menu">
+        <li><button type="submit">
+               <i class="material-icons alig-top">save</i> Сохранить
+            </button>
+        </li>
+        <li>
+            <a href="/Home/Index">
+                <i class="material-icons alig-top">cancel</i>Отменить
+            </a>
+        </li>
+</ul>
+        </div>}

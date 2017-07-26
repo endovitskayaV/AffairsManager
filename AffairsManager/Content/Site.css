@@ -64,29 +64,38 @@
 
 li {
     display: inline-block; /* Строчно-блочные элементы */
-    background: #5e2916; /* Цвет фона */
     margin-right: -4px; /* Расстояние между пунктами меню */
     border-left-style: solid;
     border-left-width: 2px;
     border-color: #fdf4e3;
 }
 
-#mainMenu li:first-child {
+#menu li:first-child {
     border-left-style: none;
 }
-
-li:hover {
+button:hover, a:hover {
     background: #5e392b; /* Цвет фона при наведении курсора мыши */
 }
 
-a {
+button, a {
     color: #fdf4e3; /* Цвет текста ссылок */
-    display: block; /* Блочный элемент */
-    padding: 5px 15px; /* Поля вокруг текста */
+    background: #5e2916; /* Цвет фона */
+    padding: 7px 15px; /* Поля вокруг текста */
     text-decoration: none; /* Убираем подчёркивание */
     font-size: 20px;
 }
 
+button:active, button:focus {
+        outline: none;
+        background: #5e392b;
+    }
+.outline {
+    outline-color: #8c1f1f;
+}
+button {
+    border: none;
+    font-family: 'Merriweather', serif;
+}
 
 .material-icons.alig-top {
     vertical-align: text-top; /*sub;*/
@@ -94,4 +103,19 @@ a {
 
 ul {
     text-align: center;
+}
+
+.dottedSheet.padding {
+    padding: 10px;
+}
+
+textarea {
+    resize:vertical;
+}
+
+.padding-left {
+    padding-left: 5px;
+}
+.margin-top {
+    margin-top:35px;
 }
