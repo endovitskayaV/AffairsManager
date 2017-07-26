@@ -1,24 +1,35 @@
 ﻿<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 @model AffairsManager.Models.Affairs
 @{
     Layout = null;
 }
-<div class="center"> 
-    <div class="header">Add</div>
+
+<a href="/Home/Index">
+    <i class="material-icons">home</i>
+</a>
+    
        <div class="dottedSheet">
+           <div class="header">Добавить</div>
     @using (Html.BeginForm())
         {
-            <p>Name:        @Html.TextBoxFor(x => x.Name, new { @maxlength = "100"})</p>
-            <p>Description: @Html.TextBoxFor(x => x.Description) </p>
-            <p>Category:    @Html.RadioButtonFor(x=>x.Importance, "Red")
-                                <span class="cl-red">Крайне важно</span> <br />
-                            @Html.RadioButtonFor(x => x.Importance,"Orange")
-                                <span class="cl-orange">Важно</span> <br />
-                            @Html.RadioButtonFor(x => x.Importance, "Green")
-                                <span class="cl-green">Неважно</span> <br />    </p>
-            <input type="submit" value="Сохранить"/>
-    }
-           </div>
- </div>
+            <p>Название: @Html.TextBoxFor(x => x.Name,
+                            new { @maxlength = "100", required = "required",style = "width: 280px;"})</p>
+            <p>Описание: @Html.TextAreaFor(x => x.Description,
+                            new { @style = "width: 280px;" }) </p>
+            <p>Важность:  <br> 
+                         @Html.RadioButtonFor(x=>x.Importance, "Red", new {@checked="chrecked"})
+                                <span class="textRed">Крайне важно</span> <br />
+                         @Html.RadioButtonFor(x => x.Importance,"Orange")
+                                <span class="textOrange">Важно</span> <br />
+                         @Html.RadioButtonFor(x => x.Importance, "Green")
+                                <span class="textGreen">Неважно</span> <br />    </p>
+           <input type="submit" value="Сохранить"> 
+        <i class="material-icons">save</i> <label>Сохранить</label> <input/>
+    <a href="/Home/Index">
+        <i class="material-icons"> cancel</i>Отменить
+    </a>
 
+    }
+</div>

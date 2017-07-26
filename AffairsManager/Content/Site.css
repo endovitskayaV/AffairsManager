@@ -7,12 +7,15 @@
 .dottedSheet {
     display: table;
     width: auto;
-    margin: 0 auto;
-    padding: 15px 20px 30px 20px; 
+    margin: auto;
+    margin-top: 40px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    padding-left: 10px;
     letter-spacing: 2px;
     background: #fdf4e3;
     border: 2px dashed #8c1f1f;
-    color: #594242;
+    color: #5e2916;
     box-shadow: 0 0 0 7px #fdf4e3;
 }
 
@@ -35,8 +38,6 @@
 
 .material-icons.cursorPointer {
     cursor: pointer;
-    padding-right:5px;
-    padding-left:5px;
 }
 
 .material-icons.cl-green {
@@ -47,4 +48,50 @@
 }
 .material-icons.cl-orange {
     color: darkorange;
+}
+
+.textRed {
+    color: red;
+}
+
+.textGreen {
+    color: forestgreen;
+}
+
+.textOrange {
+    color: darkorange;
+}
+
+li {
+    display: inline-block; /* Строчно-блочные элементы */
+    background: #5e2916; /* Цвет фона */
+    margin-right: -4px; /* Расстояние между пунктами меню */
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-color: #fdf4e3;
+}
+
+#mainMenu li:first-child {
+    border-left-style: none;
+}
+
+li:hover {
+    background: #5e392b; /* Цвет фона при наведении курсора мыши */
+}
+
+a {
+    color: #fdf4e3; /* Цвет текста ссылок */
+    display: block; /* Блочный элемент */
+    padding: 5px 15px; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    font-size: 20px;
+}
+
+
+.material-icons.alig-top {
+    vertical-align: text-top; /*sub;*/
+}
+
+ul {
+    text-align: center;
 }

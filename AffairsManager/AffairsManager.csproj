@@ -249,6 +249,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\AffairsTable.cshtml" />
     <Content Include="Views\Home\CategoryColorMatching.cshtml" />
+    <Content Include="Views\Home\MainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

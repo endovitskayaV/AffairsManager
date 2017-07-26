@@ -1,16 +1,29 @@
-﻿@model AffairsManager.Models.Affairs
+﻿<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+@model AffairsManager.Models.Affairs
 @{
     Layout = null;
 }
 
-<h2>Edit</h2>
+<a href="/Home/Index">
+    <i class="material-icons">home</i>
+</a>
 
+<div class="dottedSheet">
+    <div class="header">Редактировать</div>
     @using (Html.BeginForm())
     {
-        <p>Name:        @Html.TextBoxFor(x => x.Name)        </p>
-        <p>Description: @Html.TextBoxFor(x => x.Description) </p>
-        <p>Category:    @Html.TextBoxFor(x => x.Category)    </p>
-
-        <input type="submit" value="Сохранить" />
+        <p>Название: @Html.TextBoxFor(x => x.Name, new { @maxlength = "100" })</p>
+        <p>Описание: @Html.TextBoxFor(x => x.Description) </p>
+        <p>Важность:    <br /> 
+                     @Html.RadioButtonFor(x => x.Importance, "Red")
+                        <span class="textRed">Крайне важно</span> <br />
+                     @Html.RadioButtonFor(x => x.Importance, "Orange")
+                         <span class="textOrange">Важно</span> <br />
+                     @Html.RadioButtonFor(x => x.Importance, "Green")
+                        <span class="textGreen">Неважно</span> <br /> </p>
+        <input type="submit">   <i  class="material-icons">save</i>     <label>Сохранить</label> <input />
+        <a href="/Home/Index">  <i class="material-icons"> cancel</i>  <label>Отменить</label>  </a>
     }
-
+</div>

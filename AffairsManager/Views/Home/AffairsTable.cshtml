@@ -26,17 +26,12 @@
                            }
                        </td>
 
-                       <td>@b.Name</td>
-                       <td><label for="go">
+                       <td width="210">@b.Name</td>
+                       <td ><label for="go">
                                  <i class="material-icons cursorPointer">keyboard_arrow_down</i> </label></td>
-                       <td>
-                           @Html.ActionLink(
-                              "Удалить",  //текст ссылки
-                              "Delete",   //метод
-                              new { id = b.Id }, // аргументы  и аттрибуты
-                              new { onclick = "return confirm('Удалить ?');" })
-                       </td>
+                       <td> <i class="material-icons cursorPointer">more_vert</i></td>
                    </tr>
+
                    <tr> <td>                                        </td>
                         <td width="@b.Name.Length"><input id="go" type="checkbox" />  
                             <label class="description"> @b.Description</label></td>

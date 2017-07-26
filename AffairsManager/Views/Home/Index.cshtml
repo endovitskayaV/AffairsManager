@@ -1,24 +1,9 @@
-﻿ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+﻿<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 @{
     Layout = null; //"~/Views/Shared/_Layout.cshtml";
 }
 
+@Html.Partial("MainMenu")
 @Html.Partial("AffairsTable")
-<table>
-        <tr><td><p><a href="/Home/AddAffair">
-                      <i class="material-icons"> add_circle_outline</i>
-                   </a> </p></td></tr>
-        <tr><td><p><a href="/Home/ChooseRandomAffair">
-                      <i class="material-icons">casino</i>
-               </a></p>
-            
-                <i class="material-icons">menu</i>
-                <i class="material-icons">delete</i>
-                <i class="material-icons">save</i>
-                <i class="material-icons">home</i>
-            </td> </tr>
-        <tr> <td> @Html.Partial("Sort")</td></tr>
-        <tr> <td> @Html.Partial("Search")</td></tr>
-</table>
+
