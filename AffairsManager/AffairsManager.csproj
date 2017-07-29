@@ -241,16 +241,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\AddAffair.cshtml" />
-    <Content Include="Views\Home\Random.cshtml" />
-    <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Home\Sort.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Home\AffairsTable.cshtml" />
-    <Content Include="Views\Home\CategoryColorMatching.cshtml" />
-    <Content Include="Views\Home\MainMenu.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\EditableAffairContent.cshtml" />
   </ItemGroup>
   <ItemGroup />

@@ -72,7 +72,7 @@ namespace AffairsManager.Controllers
 
             if (request == null || request == "")
             {
-                ViewBag.Warning = "Empty request";
+                ViewBag.Warning = "Пустой запрос";
             }
             else
             {

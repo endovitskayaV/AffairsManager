@@ -71,6 +71,7 @@
     color: #993300;
     background: #fdf4e3;
     border:none;
+    cursor:pointer;
 
 }
 .material-icons.button {
@@ -176,6 +177,12 @@
 }
 
 .search-style {
+    width: 350px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.component-style {
     color: #993300;
     background: #fdf4e3;
     border-color: #993300;
@@ -183,26 +190,18 @@
     font-family: 'VEFlomasticaCyrillic', sans-serif;
     font-size: 17px;
     font-weight: bold;
-    width: 350px;
-    vertical-align: super;
-    padding-left: 3px;
-    padding-right: 3px;
 }
 
-.search-style:active, .search-style:focus {
+.selected-style {
+    padding-bottom: 2px;
+    border-width: 2px;
+}
+
+.component-style :active,
+.component-style:focus {
     outline: none;
 }
 
-
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
-    color: #5E2916;
-    opacity: 0.36;
-}
-
-input::-moz-placeholder, textarea::-moz-placeholder {
-    color: #5E2916;
-    opacity: 0.36;
-}
 
 .width-600 {
     width: 600px;
@@ -250,4 +249,30 @@ a:hover {
 
 .font-size-17 {
     font-size:17px;
+}
+.nameAHref {
+    width: 700px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+::-webkit-input-placeholder {
+    color: #5E2916;
+    opacity: 0.36;
+}
+
+:-moz-placeholder {
+    color: #5E2916;
+    opacity: 0.36;
+}
+
+::-moz-placeholder {
+    color: #5E2916;
+    opacity: 0.36;
+}
+
+:-ms-input-placeholder {
+    color: #5E2916;
+    opacity: 0.36;
 }
