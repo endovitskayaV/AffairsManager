@@ -22,6 +22,7 @@ namespace AffairsManager.Controllers
 
         public enum SortCriteria
         {
+            Default,
             New,
             Important
         }
@@ -111,11 +112,12 @@ namespace AffairsManager.Controllers
         public ActionResult AddAffair(Affairs affair)
         {
             affair.Id =UnixTimeSeconds();
+            affair.Date = DateTime.Now;
             db.Affairs.Add(affair);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-       
+
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -123,7 +125,7 @@ namespace AffairsManager.Controllers
             {
                 Affairs affair = db.Affairs.FirstOrDefault(x => x.Id==id);
                 if (affair != null)
-                    return View(affair);
+                    return View("EditableAffairContent", affair);
             }
             return HttpNotFound();
         }
@@ -131,6 +133,7 @@ namespace AffairsManager.Controllers
         [HttpPost]
         public ActionResult Edit(Affairs affair)
         {
+            affair.Date = DateTime.Now;
             db.Affairs.AddOrUpdate(affair);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -170,7 +173,7 @@ namespace AffairsManager.Controllers
             Random rnd = new Random();
             List<Affairs> affairsList = db.Affairs.ToList();
             int index = rnd.Next(0, affairsList.Count);
-            return View("Random", affairsList[index]);
+            return View("EditableAffairContent", affairsList[index]);
         }
 
         private int UnixTimeSeconds()

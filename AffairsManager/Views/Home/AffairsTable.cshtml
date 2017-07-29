@@ -3,41 +3,35 @@
       rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 
-<div class="dottedSheet">
-    <p class="header">Список дел</p>
+
+
     @if (Model != null && Model.Count > 0 && ViewBag.Warning == null)
     {
-        <table> 
+        <table border="1" class="padding-margin-main-sheet padding-bottom-70">
             @foreach (AffairsManager.Models.Affairs b in Model)
                 {
-                   <tr>
-                       <td>
-                           @switch (b.Importance)
-                           {
-                               case "Green":
-                                <i class="material-icons cl-green">label</i>
-                                   break;
-                               case "Red":
-                                <i class="material-icons cl-red">label</i>
-                                   break;
-                               case "Orange":
-                                <i class="material-icons cl-orange">label</i>
-                                   break;
-                           }
-                       </td>
+                <tr>
+                    <td>
+                        @switch (b.Importance)
+                        {
+                            case "Green":
+                                <i class="material-icons cl-green size-30">label</i>
+                                break;
+                            case "Red":
+                                <i class="material-icons cl-red size-30">label</i>
+                                break;
+                            case "Orange":
+                                <i class="material-icons cl-orange size-30">label</i>
+                                break;
+                        }
+                    </td>
 
-                       <td>@b.Name</td>
-                       <td ><label for="go">
-                                 <i class="material-icons cursorPointer">keyboard_arrow_down</i> </label></td>
-                       <td> <i class="material-icons cursorPointer">more_vert</i>
-                           <!--<a href="/Home/Edit/@b.Id">Редактировать</a></td>-->
-                   </tr>
+                    <td class="info" width="400"><a id="name" href="/Home/Edit/@b.Id">@b.Name</a></td>
 
-                   <tr> <td>                                        </td>
-                        <td width="@b.Name.Length"><input id="go" type="checkbox" />  
-                            <label class="description"> @b.Description</label></td>
-                  </tr>
-                 }
+                    <td align="right"><a href="/Home/Edit/@b.Id"><i class="material-icons button size-27">edit</i></a></td>
+                    <td align="left"><i class="material-icons button size-37">delete</i></td>
+                </tr>
+            }
         </table>
     }
 
@@ -45,4 +39,4 @@
     {
         <p class="center">&#8249;пустo&#8250;</p>
     }
-</div>
+

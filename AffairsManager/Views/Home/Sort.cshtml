@@ -1,10 +1,10 @@
 ﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-<i class="material-icons">sort</i>
 
 <form method="get" action="~/Home/Sort">
-    <p>
-        <button value="New"       name="sortCriteria"> Сначала новые  </button>
-        <button value="Important" name="sortCriteria"> Сначала важные </button>
-    </p>
-</form>
+   <table>
+       <tr> <td>   <button class="button-style" value="Default" name="sortCriteria"> По умолчанию </button> </td></tr>
+     <tr><td>  <button class="button-style" value="New"       name="sortCriteria"> Сначала новые  </button> </td></tr>
+    <tr><td>     <button class="button-style" value="Important" name="sortCriteria"> Сначала важные </button></td> </tr>
+ </table>
+   </form>

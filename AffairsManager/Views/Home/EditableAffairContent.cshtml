@@ -1,0 +1,76 @@
+﻿<script type="text/javascript" src=" https://code.jquery.com/jquery-3.2.1.min.js">
+</script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+@model AffairsManager.Models.Affairs
+@{
+    Layout = null;
+}
+
+<a href="/Home/Index">
+    <i class="material-icons button size-39">home</i>
+</a>
+
+<div class="dotted-sheet width-600">
+
+    @switch (Model.Importance)
+     {
+                case "Green":
+            <i class="material-icons corner-alig cl-green size-70">label</i>
+            break;
+        case "Red":
+            <i class="material-icons corner-alig cl-red size-70">label</i>
+            break;
+        case "Orange":
+            <i class="material-icons corner-alig cl-orange size-70">label</i>
+            break;
+     }
+
+@Html.TextAreaFor(x => x.Name,
+             new { required = "required", @placeholder = "Название", @class = "textZone tZ-name", @id = "textarea" })
+@Html.TextAreaFor(x => x.Description,
+                  new { @placeholder = "Описание", @class = "textZone tZ-info", @id = "textareaI" })
+
+
+    <div class="dotted-sheet-info unimportant-info">
+        @Model.Date.ToShortDateString()  @Model.Date.ToShortTimeString()     
+    </div>
+
+    
+    <i class="material-icons button no size-39">delete</i>
+    <button type="submit" class="invisible-button-icon">
+        <i class="material-icons button done size-39">done</i>
+    </button>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+  var textarea= $('#textarea');
+
+    textarea.height(textarea.get(0).scrollHeight);
+
+    textarea.on('keyup input', function(){
+        var $this = $(this);
+        $this.height(1);
+        $this.height(this.scrollHeight);
+    });
+});
+
+$(document).ready(function()
+{
+    var textarea= $('#textareaI');
+
+    textarea.height(textarea.get(0).scrollHeight);
+
+    textarea.on('keyup input', function(){
+        var $this = $(this);
+        $this.height(1);
+        $this.height(this.scrollHeight);
+    });
+});
+</script>

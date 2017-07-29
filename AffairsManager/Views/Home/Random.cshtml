@@ -6,29 +6,27 @@
     Layout = null;
 }
 
-<a href="/Home/Index">
+<a id="a-button" href="/Home/Index">
     <i class="material-icons alig-top">home</i>
     Домой
 </a>
-@using (Html.BeginForm())
-{
+
     <div class="dottedSheet padding">
         <div class="header">Нужно сделать сейчас</div>
-           <div class="bigText center">
-                    @switch (Model.Importance)
-                    {
-                        case "Green":
-                            <i class="material-icons cl-green">label</i>
-                            break;
-                        case "Red":
-                            <i class="material-icons cl-red">label</i>
-                            break;
-                        case "Orange":
-                            <i class="material-icons cl-orange">label</i>
-                            break;
-                    }
-                
-               @Model.Name 
-               </div>
-</div>
-    }
+        <div class="bigText center">
+            @switch (Model.Importance)
+            {
+                case "Green":
+                    <i class="material-icons cl-green">label</i>
+                    break;
+                case "Red":
+                    <i class="material-icons cl-red">label</i>
+                    break;
+                case "Orange":
+                    <i class="material-icons cl-orange">label</i>
+                    break;
+            }
+
+            <a id="name" href="/Home/Details/@Model.Id">@Model.Name</a></div>
+        </div>
+

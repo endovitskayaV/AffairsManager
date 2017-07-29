@@ -4,8 +4,8 @@
 
 <form method="get" action="~/Home/Search">
 
-    @Html.TextBox("request")
-    <select name="searchCriteria">
+    <input name="request" class="search-style" type="text" placeholder="Поиск" /><select name="searchCriteria">
+
         <option disabled>   Искать по  </option>
         @if (ViewBag.SelectedCriteria != null)
         {
@@ -52,12 +52,13 @@
             <option value="Description">Описанию</option>
             <option selected value="All">Любое совпадение</option>
         }
-    </select>
-    <i class="material-icons">search</i>
-    <input type="submit" value="Найти" />
+    </select><button type="submit" class="button-style valign-top">
+    <i class="material-icons size-27">search</i>
+</button>
+   
 </form>
-<p><div> @ViewBag.Warning</div></p>
+<div class="unimportant-info"> @ViewBag.Warning</div>
 @if (ViewBag.Warning == null)
 {
-    <p><div> @ViewBag.Message</div></p>
+    <div class="unimportant-info"> @ViewBag.Message</div>
 }
