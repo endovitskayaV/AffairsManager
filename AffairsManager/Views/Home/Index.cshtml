@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
 @{
     Layout = null; //"~/Views/Shared/_Layout.cshtml";
+    int i = 0;
 }
 
 <a href="/Home/Index">
@@ -36,6 +37,7 @@
 
             foreach (AffairsManager.Models.Affairs b in Model)
             {
+                i++;
                 <tr>
                     <td>
                         @switch (b.Importance)
@@ -55,7 +57,13 @@
                     <td> <p class="info nameAHref"><a id="name" href="/Home/Edit/@b.Id">@b.Name</a></p></td>
 
                     <td align="right"><a href="/Home/Edit/@b.Id"><i class="material-icons button size-27">edit</i></a></td>
-                    <td align="left"><i class="material-icons button size-37">delete</i></td>
+                    <td align="left">
+                        
+                          <a href="/Home/Delete/@b.Id"> 
+                        <i class="material-icons button size-37">delete</i></a>
+
+                    </td>
+
                 </tr>
             }
 
@@ -71,3 +79,4 @@
 
     </table>
 </div>
+

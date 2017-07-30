@@ -34,12 +34,6 @@ namespace AffairsManager.Controllers
             All
         }
 
-        public enum Color
-        {
-            Red, 
-            Orange, 
-            Green
-        }
         private AffairsContext db;
 
         public ActionResult Index()
@@ -164,9 +158,10 @@ namespace AffairsManager.Controllers
         {
             if (id != null)
             {
-                Affairs affair = db.Affairs.FirstOrDefault();
+                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
                 if (affair != null)
                 {
+                    
                     db.Affairs.Remove(affair);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -182,22 +177,7 @@ namespace AffairsManager.Controllers
             int index = rnd.Next(0, affairsList.Count);
             return View("EditableAffairContent", affairsList[index]);
         }
-        public ActionResult SetColor(Color color)
-        {
-            switch (color)
-            {
-                case Color.Red:
-                    ViewBag.Color = "Red";
-                    break;
-                case Color.Green:
-                    ViewBag.Color = "Green";
-                    break;
-                case Color.Orange:
-                    ViewBag.Color = "Orange";
-                    break;
-            }
-            return View("EditableAffairContent");
-        }
+    
 
         private int UnixTimeSeconds()
         {

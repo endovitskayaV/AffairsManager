@@ -65,7 +65,21 @@
             </div>
 
 
-            <i class="material-icons button no size-39">delete</i>
+
+        <div id="shadow">
+            <div class="component-style window">
+                Удалить?<br>
+                <a href="#" class="close">
+                    <i class="material-icons button no-min size-27">cancel</i>
+                </a>
+                <a href="/Home/Delete/@Model.Id" class="close">
+                    <i class="material-icons button size-30">done</i>
+                </a>
+            </div>
+        </div>
+
+        <a href="#shadow"> <i class="material-icons button no size-39">delete</i></a>
+
             <button type="submit" class="invisible-button-icon">
                 <i class="material-icons button done size-39">done</i>
             </button>
