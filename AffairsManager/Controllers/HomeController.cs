@@ -34,6 +34,12 @@ namespace AffairsManager.Controllers
             All
         }
 
+        public enum Color
+        {
+            Red, 
+            Orange, 
+            Green
+        }
         private AffairsContext db;
 
         public ActionResult Index()
@@ -67,6 +73,7 @@ namespace AffairsManager.Controllers
         {
             ViewBag.Message = "Найдено по запросу " + "'" + request + "'";
             ViewBag.SelectedCriteria = searchCriteria;
+            ViewBag.Request = request;
 
             IEnumerable<Affairs> affairsEnumerable = db.Affairs;
 
@@ -174,6 +181,22 @@ namespace AffairsManager.Controllers
             List<Affairs> affairsList = db.Affairs.ToList();
             int index = rnd.Next(0, affairsList.Count);
             return View("EditableAffairContent", affairsList[index]);
+        }
+        public ActionResult SetColor(Color color)
+        {
+            switch (color)
+            {
+                case Color.Red:
+                    ViewBag.Color = "Red";
+                    break;
+                case Color.Green:
+                    ViewBag.Color = "Green";
+                    break;
+                case Color.Orange:
+                    ViewBag.Color = "Orange";
+                    break;
+            }
+            return View("EditableAffairContent");
         }
 
         private int UnixTimeSeconds()

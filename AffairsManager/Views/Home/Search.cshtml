@@ -4,7 +4,9 @@
 
 <form method="get" action="~/Home/Search">
 
-    <input name="request" class="component-style search-style" type="text" placeholder="Поиск"  autocomplete="off" /><select class="selected-style component-style" name="searchCriteria">
+    <input name="request" class="component-style search-style"
+           type="text" placeholder="Поиск"  autocomplete="off" value=@ViewBag.Request
+           /><select class="selected-style component-style" name="searchCriteria">
 
         <option disabled>   Искать по  </option>
         @if (ViewBag.SelectedCriteria != null)
