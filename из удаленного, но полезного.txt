@@ -1,0 +1,134 @@
+//using System.Data.Entity.Migrations;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.EntityFrameworkCore;
+//using System.ComponentModel.DataAnnotations;
+
+<!--@using (Html.BeginForm())
+                 {
+                    @Html.DropDownList("daytime",
+                    EnumHelper.GetSelectList(typeof(AffairsManager.Controllers.HomeController.SortCriteria)),
+                    "Упорядочить");
+                 }-->
+
+
+
+
+
+<!--
+    <script>
+    function sendData() {
+        var request = new XMLHttpRequest();
+        var body = "?sortCriteria=" + document.getElementById('sortMenu').options[document.getElementById('sortMenu').selectedIndex].value;
+        request.open("GET", "http://localhost:55491/Home/Sort/" + body);
+        request.send();
+    }
+</script>
+    -->
+
+ /* [HttpGet]
+        [ActionName("Delete")]
+        public ActionResult ConfirmDelete(int? id)
+        {
+            if (id != null)
+            {
+                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
+                if (affair != null)
+                    return View();
+            }
+            return HttpNotFound();
+        }
+        
+        [HttpPost]*/
+
+
+
+
+
+
+
+
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+
+
+
+
+
+<td>
+                        @Html.ActionLink(
+                              "Удалить",  //текст ссылки
+                              "Delete",   //метод
+                              new { id = b.Id }, // аргументы  и аттрибуты
+                              new { onclick = "return confirm('Удалить ?');" })
+                    </td>
+                    <!--<td><p><a href="/Home/Delete/@b.Id">Удалить!</a></p></td> -->
+
+
+
+
+        /**
+         * поставить что-то вроде того @if(criteria.isSelected()) "selected" value="@ViewBag...
+         * способ динамической генерации блоков                          
+         * */
+         //у меня есть поле Важность
+         // которая потом становить прямоугольниками красными, зелеными или оранжевыми
+         // в БД у меня ВАдность типа vchar(50)
+         //и в модели string//
+         // но вообще-то говоря это поле может приминать только три значения
+         // поэтому два вопроса
+         // плохо ли, что у меня это поле типа string, а не моего какого-то?
+         /**
+          * лучше вообще числом хранить
+          * и уже потом преобразовывать в строку какую тебе там надо
+          * мне не в строку надо
+          * мне в цвет
+          * тем более
+          * но как преобразовывать? сейчас глупо, вот так:да просто enum сделать
+          * тогда такой вопрос
+          * гд делать enum в Модели или в контроллере и какой enum С цветами или хранить там ВАжно, неважно , 
+          * Очень важно. enum в представлении. хранить там эту строку
+          * ладно
+          * разберусь
+          * необязательно прям в том же файле
+          * да какая разница. читаемость
+          * не знаю, как в c# это делается, но это точно есть
+          * у элемента енума есть имя и значение
+          * enum class {
+          *     GREEN("material)cion...")
+          * }
+          * это в котлине
+          * вот, нужно что-то вроде того. и т
+          *тся так можно
+          * ну да
+          * можно
+          * и в порядок сохранить. тогда сможешь важность из енума получать по индексу, который из дб, а там уже значение сможешь получить, оно и нужно
+          * сложнофффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффффакффффффффффффффф:-****-:
+          * */
+     

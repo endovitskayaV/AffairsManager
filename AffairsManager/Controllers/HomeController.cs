@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using AffairsManager.Models;
-using System.Data.Entity.Migrations;
-using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-//using System.Data.Entity;
 
 namespace AffairsManager.Controllers
 {
@@ -17,7 +10,7 @@ namespace AffairsManager.Controllers
     {
         public HomeController()
         {
-            db = new AffairsContext();
+            affairsContext = new AffairsContext();
         }
 
         public enum SortCriteria
@@ -34,13 +27,13 @@ namespace AffairsManager.Controllers
             All
         }
 
-        private AffairsContext db;
+        private AffairsContext affairsContext;
 
         public ActionResult Index()
         {
-             return View(db.Affairs.ToList());
+             return View(affairsContext.Affairs.ToList());
             /*
-             Необходимо представить БД в виде листа, 
+             Необходимо представить таблтцу в виде листа, 
              чтобы в представлении можно было проверить условие Model.Count > 0
              Иначе возникает ошибка, потому что тогда у модели не свойста Count
              Count нужен, чтобы проверить условие наличия хоть одного дела
@@ -49,7 +42,7 @@ namespace AffairsManager.Controllers
 
         public  ActionResult Sort(SortCriteria? sortCriteria)
         {
-            List<Affairs> list= db.Affairs.ToList();
+            List<Affairs> list= affairsContext.Affairs.ToList();
             
             switch (sortCriteria)
             {
@@ -69,7 +62,9 @@ namespace AffairsManager.Controllers
             ViewBag.SelectedCriteria = searchCriteria;
             ViewBag.Request = request;
 
-            IEnumerable<Affairs> affairsEnumerable = db.Affairs;
+            /*IQueryable (а не IEnumerable) 
+            позволяет избежать иключения при выполнении Where(), если Description==null*/
+            IQueryable<Affairs> affairsQueryable = affairsContext.Affairs;
 
             if (request == null || request == "")
             {
@@ -80,42 +75,42 @@ namespace AffairsManager.Controllers
                 switch (searchCriteria)
                 {
                     case SearchCriteria.Name:
-                        affairsEnumerable = affairsEnumerable.Where(x => x.Name.Contains(request));
+                        affairsQueryable = affairsQueryable.Where(x => x.Name.Contains(request));
                         break;
                     case SearchCriteria.Description:
-                        affairsEnumerable = affairsEnumerable.Where(x => x.Description.Contains(request));
+                        affairsQueryable = affairsQueryable.Where(x => x.Description.Contains(request));
                         break;
                     default:
-                        affairsEnumerable = affairsEnumerable.Where(x => x.Name.Contains(request));
-                        IQueryable<Affairs> queryNewReq = db.Affairs;
+                        affairsQueryable = affairsQueryable.Where(x => x.Name.Contains(request));
+
+                        IQueryable<Affairs> queryNewReq = affairsContext.Affairs;
                         queryNewReq = queryNewReq.Where(x => x.Description.Contains(request));
-                        affairsEnumerable = affairsEnumerable.Union(queryNewReq);
-                        affairsEnumerable = affairsEnumerable.Distinct();
+
+                        affairsQueryable = affairsQueryable.Union(queryNewReq);
+                        affairsQueryable = affairsQueryable.Distinct();
                         break;
                 }
                
-                if (affairsEnumerable.ToList().Count<1)
+                if (affairsQueryable.ToList().Count<1)
                 {
                     ViewBag.Warning = "Nothing is found";
-                    affairsEnumerable = db.Affairs;
                 }
             }
-            return View("Index", affairsEnumerable.ToList());
+            return View("Index", affairsQueryable.ToList());
         }
 
         [HttpGet]
-        public ActionResult AddAffair()
+        public ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddAffair(Affairs affair)
+        public ActionResult Add(Affairs affair)
         {
             affair.Id =UnixTimeSeconds();
             affair.Date = DateTime.Now;
-            db.Affairs.Add(affair);
-            db.SaveChanges();
+            affairsContext.Add(affair);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +119,7 @@ namespace AffairsManager.Controllers
         {
             if (id != null)
             {
-                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id==id);
+                Affairs affair = affairsContext.GetAffair(x => x.Id==id);
                 if (affair != null)
                     return View("EditableAffairContent", affair);
             }
@@ -135,35 +130,19 @@ namespace AffairsManager.Controllers
         public ActionResult Edit(Affairs affair)
         {
             affair.Date = DateTime.Now;
-            db.Affairs.AddOrUpdate(affair);
-            db.SaveChanges();
+            affairsContext.Edit(affair);
             return RedirectToAction("Index");
         }
 
-       /* [HttpGet]
-        [ActionName("Delete")]
-        public ActionResult ConfirmDelete(int? id)
-        {
-            if (id != null)
-            {
-                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
-                if (affair != null)
-                    return View();
-            }
-            return HttpNotFound();
-        }
-        
-        [HttpPost]*/
         public ActionResult Delete(int? id)
         {
             if (id != null)
             {
-                Affairs affair = db.Affairs.FirstOrDefault(x => x.Id == id);
+                Affairs affair = affairsContext.GetAffair(x => x.Id == id);
                 if (affair != null)
                 {
-                    
-                    db.Affairs.Remove(affair);
-                    db.SaveChanges();
+
+                    affairsContext.Delete(affair);
                     return RedirectToAction("Index");
                 }
             }
@@ -173,7 +152,7 @@ namespace AffairsManager.Controllers
         public ActionResult ChooseRandomAffair()
         {
             Random rnd = new Random();
-            List<Affairs> affairsList = db.Affairs.ToList();
+            List<Affairs> affairsList = affairsContext.Affairs.ToList();
             int index = rnd.Next(0, affairsList.Count);
             return View("EditableAffairContent", affairsList[index]);
         }
@@ -186,7 +165,7 @@ namespace AffairsManager.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            affairsContext.Dispose();
             base.Dispose(disposing);
         }
 
