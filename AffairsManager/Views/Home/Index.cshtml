@@ -10,6 +10,14 @@
     <i class="material-icons button size-39">home</i>
 </a>
 
+        <a href="/Account/Logout" class="button-style right-align">
+            Sign out
+        </a>
+        <a href="/Home/Index">
+            <i class="material-icons button size-39 right-align">persone_outline</i>
+        </a>
+    
+    
 <div class="dotted-sheet">
     <table  class="padding-margin-main-sheet">
         <tr>
@@ -18,7 +26,7 @@
             <td colspan="2">@Html.Partial("Sort")</td>
         </tr>
         <tr>
-           
+
             <td height="80" valign="top" align="right">
                 <a href="/Home/Add">
                     <i class="material-icons button size-40">add_circle_outline</i>
@@ -58,8 +66,8 @@
 
                     <td align="right"><a href="/Home/Edit/@b.Id"><i class="material-icons button size-27">edit</i></a></td>
                     <td align="left">
-                        
-                          <a href="/Home/Delete/@b.Id"> 
+
+                          <a href="/Home/Delete/@b.Id">
                         <i class="material-icons button size-37">delete</i></a>
 
                     </td>
@@ -70,7 +78,7 @@
         }
 
         else
-        { 
+        {
             <tr>
                 <td> </td>
                 <td align="center"> &#8249;пустo&#8250;</td>

@@ -1,6 +1,7 @@
 ﻿body {
     font-family: 'VEFlomasticaCyrillic', sans-serif;
     background-image: url(http://www.niceimage.ru/pic/201305/1366x768/niceimage.ru-49636.jpg);
+    
 }
 
 .dotted-sheet {
@@ -51,47 +52,50 @@
     font-family: 'VEFlomasticaCyrillic', sans-serif;
     font-size: 17px;
     font-weight: bold;
+    border-style: solid;
+    border-width:2px;
 }
 
-.invisible-button-icon:active,
-.invisible-button-icon:focus, 
-.button-stylen:active,
-.button-style:focus {
-     outline: none;
-     cursor: pointer;
-}
-
-.button-style:hover {
-    border-color: #5e392b;
-    color: #5e392b;
-    background: #d6c9b2;
-    cursor: pointer;
+    .invisible-button-icon:active,
+    .invisible-button-icon:focus,
+    .button-stylen:active,
+    .button-style:focus {
+        outline: none;
+        cursor: pointer;
     }
+
+    .button-style:hover {
+        border-color: #5e392b;
+        color: #5e392b;
+        background: #d6c9b2;
+        cursor: pointer;
+    }
+
 .invisible-button-icon {
     color: #993300;
     background: #fdf4e3;
-    border:none;
-    cursor:pointer;
-
+    border: none;
+    cursor: pointer;
 }
+
 .material-icons.button {
     color: #993300;
 }
 
-.material-icons.button.done {
-    padding-bottom: 25px;
-    padding-right: 20px;
-}
+    .material-icons.button.done {
+        padding-bottom: 25px;
+        padding-right: 20px;
+    }
 
-.material-icons.button.no {
-    padding-bottom: 25px;
-    padding-left: 40px;
-    padding-right: 450px;
-}
+    .material-icons.button.no {
+        padding-bottom: 25px;
+        padding-left: 40px;
+        padding-right: 450px;
+    }
 
-.material-icons.button:hover, button:hover {
-    color: #5e392b;
-}
+    .material-icons.button:hover, button:hover {
+        color: #5e392b;
+    }
 
 .material-icons.size-27 {
     font-size: 27px;
@@ -117,18 +121,17 @@
     font-size: 70px;
 }
 
-.material-icons.cl-green {
-    color: forestgreen;
-}
-
-.material-icons.cl-red {
+.cl-red {
     color: red;
 }
 
-.material-icons.cl-orange {
+.cl-orange {
     color: darkorange;
 }
 
+.cl-green {
+   color:green;
+}
 .material-icons.corner-alig {
     padding-top: 20px;
     padding-left: 20px;
@@ -153,7 +156,7 @@
 }
 
 .tZ-name {
-    margin:35px 20px 35px 60px;
+    margin: 35px 20px 35px 60px;
     text-align: center;
     font-size: 42px;
     width: 520px;
@@ -203,16 +206,17 @@
 }
 
 #radio {
-    display:none;
+    display: none;
 }
 
 #label-edit:hover {
-    cursor:default;
+    cursor: default;
 }
 
-#label-edit:hover #radio {
-    display:block;
-}
+    #label-edit:hover #radio {
+        display: block;
+    }
+
 .width-600 {
     width: 600px;
 }
@@ -226,16 +230,17 @@
 }
 
 .padding-margin-main-sheet {
-    margin:60px 20px 60px 20px;
+    margin: 60px 20px 60px 20px;
 }
 
 .padding-bottom-70 {
-    padding-bottom:70px;
+    padding-bottom: 70px;
 }
 
-.padding-left-20{
-    padding-left:20px;
+.padding-left-20 {
+    padding-left: 20px;
 }
+
 .textRed {
     color: red;
 }
@@ -247,22 +252,29 @@
 .textOrange {
     color: darkorange;
 }
+
 .translucent-text {
-    opacity:0.36;
+    opacity: 0.36;
 }
+
 a {
     text-decoration: none; /* Убираем подчёркивание */
     color: #5E2916;
 }
 
-a:hover {
-   color: #5e392b;
-   font-weight:bold;
-}
+    a:hover {
+        color: #5e392b;
+        font-weight: bold;
+    }
 
 .font-size-17 {
-    font-size:17px;
+    font-size: 17px;
 }
+
+.font-size-10 {
+    font-size: 10px;
+}
+
 .nameAHref {
     width: 700px;
     overflow: hidden;
@@ -325,4 +337,46 @@ a:hover {
 
 .no-min {
     margin-right: 80px;
+}
+
+.right-align {
+    float: right;
+}
+
+.center-align {
+   text-align: center;
+}
+.padding-top-70 {
+    margin-top: 70px;
+}
+
+.margin-left-530 {
+    margin-left: 530px;
+}
+
+.margin-left-30 {
+    margin-left: 30px;
+} 
+.border {
+    border: 2px solid #993300;
+}
+.errorText{
+    color:red;
+    padding-top:30px;
+}
+
+.validation-summary-errors {
+    color: red;
+    font-weight: bold;
+}
+
+.field-validation-error {
+    border-color: red;
+    background-color: lightcoral;
+}
+
+.validation-summary-errors ul {
+    list-style: none;
+    margin-right:60px;
+    margin-top:20px;
 }

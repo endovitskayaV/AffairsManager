@@ -31,13 +31,25 @@ namespace AffairsManager.Controllers
 
         public ActionResult Index()
         {
-             return View(affairsContext.Affairs.ToList());
+            if (User.Identity.IsAuthenticated)
+                return View(affairsContext.Affairs.ToList());
+            else
+            {
+                ViewBag.ReturnUrl = Request.Url;
+                return View("Login");
+            }
             /*
              Необходимо представить таблтцу в виде листа, 
              чтобы в представлении можно было проверить условие Model.Count > 0
              Иначе возникает ошибка, потому что тогда у модели не свойста Count
              Count нужен, чтобы проверить условие наличия хоть одного дела
              */
+        }
+
+        public ActionResult Info(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View("Info");
         }
 
         public  ActionResult Sort(SortCriteria? sortCriteria)
@@ -108,7 +120,7 @@ namespace AffairsManager.Controllers
         [HttpPost]
         public ActionResult Add(Affairs affair)
         {
-            affair.Id =UnixTimeSeconds();
+            affair.Id =Functions.UnixTimeSeconds();
             affair.Date = DateTime.Now;
             affairsContext.Add(affair);
             return RedirectToAction("Index");
@@ -158,10 +170,7 @@ namespace AffairsManager.Controllers
         }
     
 
-        private int UnixTimeSeconds()
-        {
-            return (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

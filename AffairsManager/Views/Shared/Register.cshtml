@@ -1,0 +1,38 @@
+﻿<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+
+@model AffairsManager.Models.RegisterModel
+
+@{
+    Layout = null;
+}
+
+
+<a href="/Account/Login" class="button-style right-align">
+    Войти
+</a>
+<a href="/Home/Info">
+    <i class="material-icons button size-39">info</i>
+</a>
+
+   <form  method="post" action="~/Account/Register" class="dotted-sheet width-600">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+      
+       
+    @Html.TextBoxFor(x => x.Email,
+             new { required = "required", @placeholder = "Email", @autocomplete = "off" , @class = "textZone tZ-info padding-top-70" })
+
+
+    @Html.PasswordFor(x => x.Password,
+             new { required = "required", @placeholder = "Пароль", @class = "textZone tZ-info" })
+      
+       
+    @Html.PasswordFor(x => x.PasswordConfirm,
+             new { required = "required", @placeholder = "Повторите пароль", @class = "textZone tZ-info" })
+
+    <button type="submit" class="invisible-button-icon margin-left-530">
+        <i class="material-icons button done size-39">done</i>
+    </button>
+</form>
